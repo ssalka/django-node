@@ -1,6 +1,6 @@
 "use strict";
 
-// Setup webpack and middleware
+// Webpack
 const webpackConfig = require('../webpack.config');
 const compiler = require('webpack')(webpackConfig);
 const webpackMiddleware = {
@@ -8,19 +8,46 @@ const webpackMiddleware = {
     hot: require('webpack-hot-middleware')
 };
 
-// Create express app
+// Express
 const http = require('http');
 const express = require('express');
-
-
 const app = express();
-// Attach dev middleware
+
+// React
+var reactRender = require('react-render');
+const bodyParser = require('body-parser');
+
+// Ensure support for loading files that contain ES6+7 & JSX
+require('babel-register');
+
+// Set up express app
+app.use(bodyParser.json());
 app.use(webpackMiddleware.dev(compiler, {
-  noInfo: true,
-  publicPath: webpackConfig.output.publicPath
+    noInfo: true,
+    publicPath: webpackConfig.output.publicPath
 }));
-// Attach hot middleware
 app.use(webpackMiddleware.hot(compiler));
 app.use(express.static('assets'));
+
+// Render
+app.post('/render', function (req, res) {
+    reactRender(req.body, function (err, markup) {
+        if (err) {
+            res.json({
+                error: {
+                    type: err.constructor.name,
+                    message: err.message,
+                    stack: err.stack
+                },
+                markup: null
+            });
+        } else {
+            res.json({
+                error: null,
+                markup: markup
+            });
+        }
+    });
+});
 
 module.exports = new http.Server(app);

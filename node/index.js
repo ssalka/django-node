@@ -16,7 +16,7 @@ server.listen(ENV.ports.node);
 redis.subscribe('chat');
 
 io.use(function (socket, next) {
-    // Grab sessionid from handshake cookie
+    // Grab session ID from cookie
     var handshake = socket.request;
     if (handshake.headers.cookie) {
         let cookie = handshake.headers.cookie;

@@ -3,28 +3,24 @@
 <head>
     <title>{{ title }}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    {#  TODO: Implement an AJAX function so jQuery is no longer needed  #}
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
     <script src="http://localhost:4000/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+        // Workaround until React chat update issue is resolved
+        var _djangovars = {
+            comments: {{ comments|safe }}
+        };
+    </script>
 </head>
 <body>
 <h3>{{ title }}</h3>
 {% if user.is_authenticated %}
-    Logged in as <a href="http://localhost:8000/api/users/me/">{{ user.username }}</a>
+    Logged in as <a href="http://localhost:8000/api/users/me/">{{ user }}</a>
 {% else %}
     No user logged in.
 {% endif %}
-<ul id="comments">
-    {% for comment in comments %}
-        <li>{{ comment.user }}: {{ comment.text }}</li>
-    {% endfor %}
-</ul>
-<input
-        id="comment"
-        type="text"
-        title="comment"
-        placeholder="Comment"
-        autofocus
-/>
+<div id="root"></div>
 <script type="text/javascript" src="http://localhost:4000/assets/bundle.js" charset="utf-8"></script>
 </body>
 </html>
