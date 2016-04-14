@@ -1,15 +1,12 @@
 const React = require('react');
-
-const drf = require('../drf');
-
-const ComponentTemplate = require('./component-template');
 const urls = require('../../settings').urls;
 const autoBind = require('react-autobind');
 
-var socket = io.connect(urls.node);
-
+const ComponentTemplate = require('./component-template');
 var CommentList = require('./comment-list');
 var CommentInput = require('./comment-input');
+
+var socket = io.connect(urls.node);
 
 class ChatWindow extends ComponentTemplate {
     constructor(props) {
