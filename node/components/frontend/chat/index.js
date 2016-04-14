@@ -1,6 +1,7 @@
 const React = require('react');
 const urls = require('../../settings').urls;
 const autoBind = require('react-autobind');
+const drf = require('../drf');
 
 const ComponentTemplate = require('./component-template');
 var CommentList = require('./comment-list');
