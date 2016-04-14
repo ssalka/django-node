@@ -3,18 +3,7 @@
 <head>
     <title>{{ title }}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<<<<<<< HEAD
-=======
-    {#  TODO: Implement an AJAX function so jQuery is no longer needed  #}
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
->>>>>>> 791cf8c3818048e04e5e5d3a5d9dc218313bd477
     <script src="http://localhost:4000/socket.io/socket.io.js"></script>
-    <script type="text/javascript">
-        // Workaround until React chat update issue is resolved
-        var _djangovars = {
-            comments: {{ comments|safe }}
-        };
-    </script>
 </head>
 <body>
 <h3>{{ title }}</h3>
