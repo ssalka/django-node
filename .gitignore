@@ -1,3 +1,4 @@
 *.pyc
 *.log
+migrations
 node_modules

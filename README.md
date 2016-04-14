@@ -10,7 +10,7 @@ components/dependencies of the project are likely to change over time.*
 
 ### Installation
 
-To get started, you will need existing installations of Python (I used 3.5), Node.js, and Redis.
+To get started, you will need existing installations of Python (this project has been tested only on 3.5), Node.js, and Redis.
 Then, make sure all dependencies are installed:
 
 ```
@@ -21,7 +21,7 @@ cd ../node
 npm install && cd ../
 ```
 
-Finally, make sure you're running an instance of Redis, as the Node.js entry point attempts
+And adjust `settings.py` to your liking. Finally, make sure you're running an instance of Redis, as the Node.js entry point attempts
 to establish a connection with Redis.
 
 ### Running the App

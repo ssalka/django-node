@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.renderers import JSONRenderer
 from .models import User, Comment
 
 
@@ -18,7 +19,10 @@ class UserListingField(serializers.RelatedField):
 
 class DateTimeListingField(serializers.RelatedField):
     def to_representation(self, value):
-        return value.strftime('%m-%d-%Y %T:%M%p')
+        return {
+            'date': value.strftime('%x'),
+            'time': value.strftime('%X')
+        }
 
 
 class CommentListingField(serializers.RelatedField):
@@ -42,6 +46,9 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
     user = UserListingField(read_only=True)
     created = DateTimeListingField(read_only=True)
 
+    def to_json(self):
+        return JSONRenderer().render(self.data)
+
     class Meta:
         model = Comment
-        fields = ('user', 'text', 'created')
+        fields = ('id', 'user', 'text', 'created')

@@ -1,12 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
 
-// Django log keeps reporting a 404 at /__webpack_hmr, though
-// this does not noticeably affect the app's functionality
-
 module.exports = {
     context: path.join(__dirname, 'components/frontend'),
-    entry: ["./index.js","webpack-hot-middleware/client"],
+    entry: ["./index.js","webpack-hot-middleware/client?path=http://localhost:4000/__webpack_hmr"],
     output: {
         path: path.resolve('./assets'),
         filename: "bundle.js",
@@ -23,10 +20,16 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: 'babel-loader',
                 query: {
-                    presets: ['es2015', 'stage-0']
+                    presets: ['es2015', 'stage-0', 'react']
                 }
             }
         ]
+    },
+    node: {
+        fs: "empty"
+    },
+    externals: {
+        // TODO: Load node_modules as external dependencies to reduce webpack compile time
     },
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),
