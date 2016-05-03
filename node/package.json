@@ -1,14 +1,14 @@
 {
-  "name": "nodejs",
+  "name": "django-node",
   "version": "1.0.0",
   "description": "An experimental mixing of Node.js and Django backends",
   "main": "index.js",
   "scripts": {
     "test": "mocha -R spec ./tests/index.js",
     "start": "node index.js",
-    "nodemon": "nodemon heroku/djangonodedev/node/index.js"
+    "nodemon": "nodemon ./index.js"
   },
-  "author": "",
+  "author": "Steven Salka <steven@ssalka.io>",
   "license": "MIT",
   "dependencies": {
     "ajax-request": "^1.2.1",
